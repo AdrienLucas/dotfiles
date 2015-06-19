@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo-warn "Unstowing $1..."
+
+(stow -D -t ~ $2) && echo-success "OK!" || echo-error "KO..."

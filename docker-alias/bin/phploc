@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec ./phaudit.sh phploc $1

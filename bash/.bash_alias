@@ -1,0 +1,45 @@
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias l='ls -lah'
+
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+#Aptitude shortcuts
+alias apt-install='sudo aptitude install'
+alias apt-search='sudo aptitude search'
+alias apt-upgrade='sudo aptitude update && sudo aptitude safe-upgrade'
+
+#Web shortcuts
+alias sf2='php app/console'
+alias wwwdo='sudo -u www-data'
+
+#Homestead (vagrant) shortcuts
+alias hmstd-sql='mysql -u homestead -psecret -h 192.168.10.10'
+
+#Docker shortcuts
+alias dckr-start="sudo service docker start"
+alias dckr-up="docker-compose up -d"
+alias dckr-ip="/sbin/ip route|awk '/default/ { print $3 }'"
+
+#Amod Rich Terminal Emulator
+alias s='arte_list'
+
+#Apps launching overloads
+alias spotify='LD_LIBRARY_PATH=/usr/share/atom spotify'
+alias vi='vim'

@@ -1,0 +1,4 @@
+#Disable TouchScreen
+xinput disable `xinput list | grep "Touchscreen" | sed -E 's/^.*id=([0-9]+).*$/\1/'`
+
+#Enable middle button emulation through left and right click at the same time

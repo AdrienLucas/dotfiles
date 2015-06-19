@@ -1,0 +1,7 @@
+#!/bin/bash
+# TODO: notify if there is any not found packages or if any error occurs
+if test `id -u` -eq 0; then
+    aptitude update && aptitude install -y $1
+else
+    echo-error "You have to be root!"
+fi

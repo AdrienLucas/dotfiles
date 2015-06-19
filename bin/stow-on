@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [[ $1 != "" ]]; then
+    echo-warn "Stowing $1..."
+fi
+
+if (stow -t ~ $2 ); then
+    if [[ $1 != "" ]]; then
+        echo-success "OK!"
+    fi
+else
+    if [[ $1 != "" ]]; then
+        echo-error "KO..."
+    fi
+fi

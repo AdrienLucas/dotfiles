@@ -1,0 +1,59 @@
+
+#Others variables
+TODAY = $(shell date +%d%m%Y)
+PWD = $(shell pwd)
+
+# Commands
+ECHO = echo
+
+# Functions
+ECHO_COLORED = $(ECHO) "$(1)"
+ECHO_RED = $(call ECHO_COLORED,\\033[31m[!] $(1)\\033[0m)
+ECHO_GREEN = $(call ECHO_COLORED,\\033[32m[+] $(1)\\033[0m)
+ECHO_YELLOW = $(call ECHO_COLORED,\\033[33m[~] $(1)\\033[0m)
+PACKAGE-INSTALL =  aptitude update && aptitude install -y $(1)
+
+STOW = $(call ECHO_YELLOW,Stowing $(basename $(1))...) && \
+	(stow -t ~ ./stow/$(1) && $(call ECHO_GREEN,OK!)) || \
+	($(call ECHO_RED,KO...) && return 0)
+
+# Phony targets
+# TODO: loop over the directories .
+install: install-dotfiles ~/bin/phaudit.sh
+uninstall: uninstall-dotfiles
+
+install-dotfiles:
+	$(call STOW, vim)
+	$(call STOW, bash)
+	$(call STOW, session)
+
+bash:
+	$(call STOW,bash)
+
+stow: $(shell find ./stow -mindepth 1 -maxdepth 1 -type d)
+	$(foreach target,$?,$(STOW))
+
+uninstall-dotfiles:
+	@stow -D -t ~ vim
+	@stow -D -t ~ bash
+	@stow -D -t ~ session
+
+~/bin/phaudit.sh:
+	$(shell docker pull jolicode/phaudit)
+	$(call STOW, bin/phaudit)
+
+#APT related
+# TODO: add an "is root" check
+# TODO: notify if there is any not found packages or if any error occurs
+system: system-dependencies system-additional-packages
+system-dependencies:
+	$(call ECHO_YELLOW,Installing minimal system dependencies...)
+	@$(PACKAGE-INSTALL) java7-jdk  php5-cli curl  VirtualBox vagrant keepassx cifs-utils gksu screen zsh ruby1.9.1-dev g++ libsqlite3-dev htop terminator git lxc-docker docker-compose mysql-client imagemagick
+	$(call ECHO_GREEN,OK!)
+
+system-additional-packages:
+	$(call ECHO_YELLOW,Installing additionals system packages...)
+	@$(PACKAGE-INSTALL) sparkleshare playonlinux git-cola chromium-browser ghex gimp vlc nodejs npm flashplugin-nonfree zulucrypt-gui
+	$(call ECHO_GREEN,OK!)
+
+.PHONY: install uninstall system system-dependencies system-additional-packages stow bash

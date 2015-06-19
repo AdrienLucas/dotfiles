@@ -1,0 +1,29 @@
+# Colors
+COL_R = "\\033[31m"
+COL_G = "\\033[32m"
+COL_Y = "\\033[33m"
+ENDC  = "\\033[0m"
+
+#Others variables
+TODAY = $(shell date +%d%m%Y)
+PWD = $(shell pwd)
+
+# Commands
+ECHO = echo
+
+# Functions
+ECHO_GREEN = $(ECHO) "$(COL_G)[+] $(1)$(ENDC)"
+
+# Functions
+ECHO_COLORED = $(ECHO) "$(1)"
+ECHO_RED = $(call ECHO_COLORED,\\033[31m[!] $(1)\\033[0m)
+ECHO_GREEN = $(call ECHO_COLORED,\\033[32m[+] $(1)\\033[0m)
+ECHO_YELLOW = $(call ECHO_COLORED,\\033[33m[~] $(1)\\033[0m)
+PACKAGE-INSTALL = aptitude update && aptitude install -y $(1)
+
+
+
+test:
+	@$(call ECHO_GREEN, All done)
+
+.PHONY: test

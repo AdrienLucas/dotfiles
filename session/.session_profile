@@ -1,0 +1,19 @@
+
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/home/adrienlucas/bin/arte:/home/adrienlucas/bin:/home/adrienlucas/.local/bin:$PATH"
+
+export SSH_KEY_PATH="~/.ssh/dsa_id"
+export LD_LIBRARY_PATH="$HOME/bin/linuxbrew/lib:$LD_LIBRARY_PATH"
+
+# Alias definitions.
+if [ -f ~/.bash_alias ]; then
+    . ~/.bash_alias
+fi
+
+# Functions definitions.
+if [ -f ~/.bash_functions ]; then
+    . ~/.bash_functions
+fi
+
+# Xiki Shell
+. ~/.xsh

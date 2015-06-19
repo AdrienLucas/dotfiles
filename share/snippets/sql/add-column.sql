@@ -1,0 +1,1 @@
+ALTER TABLE ${1:table_name} ADD ${2:field_name} ${3:field_type};

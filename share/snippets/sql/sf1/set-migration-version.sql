@@ -1,0 +1,1 @@
+UPDATE migration_version SET version=${1:#version_number};
