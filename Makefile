@@ -1,4 +1,4 @@
-export PATH := bin:$(PATH)
+export PATH := binaries/.local/bin:$(PATH)
 
 ifneq (,$(SUDO_USER))
 	OWNER := $(SUDO_USER)
@@ -35,28 +35,30 @@ system-dependencies:
 	@echo-success "Done!"
 
 system-additional-packages:
-	@bin/echo-warn "Installing additionals system packages..."
-	@bin/apt-install "sparkleshare playonlinux git-cola chromium-browser ghex \
+	@echo-warn "Installing additionals system packages..."
+	@apt-install "sparkleshare playonlinux git-cola chromium-browser ghex \
 		gimp vlc nodejs npm flashplugin-nonfree zulucrypt-gui"
-	@bin/gem-install "git-up sass"
-	@bin/echo-success "Done!"
+	@gem-install "git-up sass"
+	@echo-success "Done!"
 
 # Dotfiles (stowing) related profiles
 stow:
-	@bin/stow-on "" 01
-	@bin/stow-on "Bash dotfiles" bash
-	@bin/stow-on "Session dotfiles" session
-	@bin/stow-on "Vim dotfiles" vim
-	@bin/stow-on "Docker alias" docker-alias
-	@bin/stow-on "Shared files" share
+	@stow-on "" 01
+	@stow-on "Bash dotfiles" bash
+	@stow-on "Session dotfiles" session
+	@stow-on "Vim dotfiles" vim
+	@stow-on "Binaries" binaries
+	@stow-on "Docker alias" docker-alias
+	@stow-on "Shared files" share
 
 unstow:
-	@bin/stow-off "Shared files" share
-	@bin/stow-off "Docker alias" docker-alias
-	@bin/stow-off "Vim dotfiles" vim
-	@bin/stow-off "Session dotfiles" session
-	@bin/stow-off "Bash dotfiles" bash
-	@bin/stow-off "" 01
+	@stow-off "Shared files" share
+	@stow-off "Docker alias" docker-alias
+	@stow-off "Binaries" binaries
+	@stow-off "Vim dotfiles" vim
+	@stow-off "Session dotfiles" session
+	@stow-off "Bash dotfiles" bash
+	@stow-off "" 01
 
 include-profile: stow
 	$(shell grep "profile_customisation" ~/.profile | wc -l) || \
