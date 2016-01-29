@@ -47,6 +47,7 @@ stow:
 	@stow-on "Bash dotfiles" bash
 	@stow-on "Session dotfiles" session
 	@stow-on "Vim dotfiles" vim
+	@stow-on "Git dotfiles" gitconfig
 	@stow-on "Binaries" binaries
 	@stow-on "Docker alias" docker-alias
 	@stow-on "Shared files" share
@@ -55,6 +56,7 @@ unstow:
 	@stow-off "Shared files" share
 	@stow-off "Docker alias" docker-alias
 	@stow-off "Binaries" binaries
+	@stow-off "Git dotfiles" gitconfig
 	@stow-off "Vim dotfiles" vim
 	@stow-off "Session dotfiles" session
 	@stow-off "Bash dotfiles" bash

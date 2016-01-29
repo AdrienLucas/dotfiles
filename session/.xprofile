@@ -1,4 +1,6 @@
 #Disable TouchScreen
 xinput disable `xinput list | grep "Touchscreen" | sed -E 's/^.*id=([0-9]+).*$/\1/'`
 
+#Disable touchpad while typing
+syndaemon -d -K -t -i 1
 #Enable middle button emulation through left and right click at the same time

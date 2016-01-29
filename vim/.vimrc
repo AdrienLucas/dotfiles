@@ -30,6 +30,8 @@ else
 endif
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
+set number		" show lines number
+set showmode
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
 
@@ -96,3 +98,18 @@ if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
 		  \ | wincmd p | diffthis
 endif
+
+" Tabs and indentation
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+
+" sudo to write
+command W w !sudo tee % > /dev/null
+
+" Vundle conf
+" filetype off
+" set rtp+=~/.vim/bundle/Vundle.vim
+" call vundle#begin()
+
+" Plugin 'StanAngeloff/php.vim'
